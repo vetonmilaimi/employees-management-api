@@ -2,7 +2,9 @@ export const NODE_ENV = process.env.NODE_ENV || 'development'
 export const SERVER_PORT = process.env.PORT || '3000'
 export const HOST_NAME = process.env.HOST || 'localhost'
 export const DATABASE_URL = process.env.DB_URL || ''
+export const REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379'
 export const SALT_ROUNDS = process.env.SALT_ROUNDS || '10'
+export const JWT_SECRET = process.env.JWT_KEY || ''
 
 export const isProduction = NODE_ENV === 'production'
 

@@ -9,4 +9,5 @@ export interface IUser {
   role: USER_ROLES
 }
 
-export interface IUserRegister extends Omit<IUser, '_id' | 'role'> {}
+export interface IUserRegisterRequest extends Omit<IUser, '_id' | 'role'> {}
+export interface IUserLoginRequest extends Pick<IUser, 'email' | 'password'> {}

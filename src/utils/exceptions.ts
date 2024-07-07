@@ -43,3 +43,33 @@ export class RouteNotFoundError extends BaseError {
     this.path = path
   }
 }
+
+export class InvalidTimeString extends BaseError {
+  name = 'invalid-time-string'
+  message = 'Invalid time string'
+  statusCode = 400
+
+  constructor() {
+    super()
+  }
+}
+
+export class FailedHttpRequest extends BaseError {
+  name = 'failed-http-request'
+  message = 'Failed Http Request'
+  statusCode = 400
+
+  constructor() {
+    super()
+  }
+}
+
+export class LoginError extends BaseError {
+  name = 'login-error'
+  message = 'Email/Password is incorrect!'
+  statusCode = 400
+
+  constructor() {
+    super()
+  }
+}
