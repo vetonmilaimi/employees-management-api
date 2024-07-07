@@ -13,6 +13,15 @@ class ValidationSchemas {
     email: Joi.string().email().required(),
     password: Joi.string().required(),
   })
+
+  static accessToken = Joi.object({
+    'access-token': Joi.string().required(),
+  })
+
+  static headerTokens = Joi.object({
+    'access-token': Joi.string().required(),
+    'refresh-token': Joi.string().required(),
+  })
 }
 
 export default ValidationSchemas

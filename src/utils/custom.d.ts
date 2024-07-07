@@ -1,9 +1,11 @@
+import { UserSession } from './types'
+
 export {}
 
 declare global {
   namespace Express {
     export interface Request {
-      // session: UserSession
+      session: UserSession
     }
   }
 

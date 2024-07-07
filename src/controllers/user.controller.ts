@@ -3,7 +3,7 @@ import BaseResponse from '../utils/BaseResponse'
 import { IUserLoginRequest, IUserRegisterRequest } from '../utils/types'
 import UserService from '../services/user.service'
 import CryptService from '../services/crypt.service'
-import { LoginError } from '../utils/exceptions'
+import { LoginError, UserNotFoundError } from '../utils/exceptions'
 
 class UserController {
   private userService
@@ -37,6 +37,24 @@ class UserController {
       session,
       user,
     })
+  }
+
+  public regenerateTokens = async (req: Request, res: Response) => {
+    const user = await this.userService.getUserById(req.session.userId)
+
+    if (!user) {
+      throw new UserNotFoundError()
+    }
+
+    const newSession = await this.userService.saveSession(req.session.userId, req.session.userRole)
+    this.userService.deleteSession(req.session.entityId)
+    return BaseResponse(res).success(newSession)
+  }
+
+  public logout = async (req: Request, res: Response) => {
+    await this.userService.deleteSession(req.session.entityId)
+
+    return BaseResponse(res).success({ logout: true })
   }
 }
 

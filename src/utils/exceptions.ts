@@ -73,3 +73,53 @@ export class LoginError extends BaseError {
     super()
   }
 }
+
+export class UserNotFoundError extends BaseError {
+  name = 'user-not-found-error'
+  message = "User doesn't exist"
+  statusCode = 404
+
+  constructor() {
+    super()
+  }
+}
+
+export class InvalidAccessToken extends BaseError {
+  name = 'invalid-access-token'
+  message = 'Access Token is not valid'
+  statusCode = 401
+
+  constructor() {
+    super()
+  }
+}
+
+export class ExpiredAccessToken extends BaseError {
+  name = 'expired-access-token'
+  message = 'Access Token has Expired'
+  statusCode = 401
+
+  constructor() {
+    super()
+  }
+}
+
+export class InvalidRefreshToken extends BaseError {
+  name = 'invalid-refresh-token'
+  message = 'Refresh Token is not valid'
+  statusCode = 401
+
+  constructor() {
+    super()
+  }
+}
+
+export class ExpiredRefreshToken extends BaseError {
+  name = 'expired-refresh-token'
+  message = 'Refresh Token has Expired'
+  statusCode = 401
+
+  constructor() {
+    super()
+  }
+}

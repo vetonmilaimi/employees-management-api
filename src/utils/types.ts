@@ -1,5 +1,15 @@
 import { USER_ROLES } from './constants'
 
+export interface UserSession {
+  entityId: string
+  userId: string
+  accessToken: string
+  refreshToken: string
+  accessTokenExp: number
+  refreshTokenExp: number
+  userRole: USER_ROLES
+}
+
 export interface IUser {
   _id: string
   email: string

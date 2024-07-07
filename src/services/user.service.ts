@@ -20,6 +20,10 @@ class UserService {
     return await UserModel.findOne({ email }).lean().exec()
   }
 
+  public getUserById = async (userId: string) => {
+    return await UserModel.findById(userId).lean().exec()
+  }
+
   public create = async (data: IUserRegisterRequest) => {
     return await UserModel.create(data)
   }
