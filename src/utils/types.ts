@@ -21,3 +21,11 @@ export interface IUser {
 
 export interface IUserRegisterRequest extends Omit<IUser, '_id' | 'role'> {}
 export interface IUserLoginRequest extends Pick<IUser, 'email' | 'password'> {}
+
+export interface IOrganization {
+  _id: string
+  name: string
+  description?: string
+}
+
+export interface IOrganizationCreateReq extends Omit<IOrganization, '_id'> {}

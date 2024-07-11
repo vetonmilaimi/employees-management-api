@@ -22,6 +22,11 @@ class ValidationSchemas {
     'access-token': Joi.string().required(),
     'refresh-token': Joi.string().required(),
   })
+
+  static createOrganization = Joi.object({
+    name: Joi.string().required(),
+    description: Joi.string().optional(),
+  })
 }
 
 export default ValidationSchemas
