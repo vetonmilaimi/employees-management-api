@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express'
 import authRoutes from './auth.routes'
 import organizationRoutes from './organization.routes'
-import adminRoutes from './admin.routes'
+import superAdminRoutes from './super-admin.routes'
 
 const router = Router()
 
@@ -11,6 +11,6 @@ router.get('/health', (_request: Request, response: Response) => {
 
 router.use('/auth', authRoutes)
 router.use('/organization', organizationRoutes)
-router.use('/admin', adminRoutes)
+router.use('/super-admin', superAdminRoutes)
 
 export default router
