@@ -13,7 +13,21 @@ class UserController {
   }
 
   public me = async (req: Request, res: Response) => {
+    // Handle this response
     return BaseResponse(res).success({})
+  }
+
+  public list = async (req: Request, res: Response) => {
+    const users = await this.userService.list()
+
+    return BaseResponse(res).success(users)
+  }
+
+  public delete = async (req: Request, res: Response) => {
+    const id = req.query._id as string
+
+    const response = await this.userService.deleteUserById(id)
+    return BaseResponse(res).success(response)
   }
 
   public register = async (req: Request<object, object, IUserRegisterRequest>, res: Response) => {

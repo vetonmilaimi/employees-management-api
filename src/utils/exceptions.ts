@@ -123,3 +123,13 @@ export class ExpiredRefreshToken extends BaseError {
     super()
   }
 }
+
+export class UnAuthorized extends BaseError {
+  name = 'un-authorized'
+  message = 'Unauthorized role'
+  statusCode = 401
+
+  constructor() {
+    super()
+  }
+}

@@ -24,8 +24,16 @@ class UserService {
     return await UserModel.findById(userId).lean().exec()
   }
 
+  public deleteUserById = async (userId: string) => {
+    return await UserModel.findByIdAndDelete(userId).lean().exec()
+  }
+
   public create = async (data: IUserRegisterRequest) => {
     return await UserModel.create(data)
+  }
+
+  public list = async () => {
+    return await UserModel.find({}).lean().exec()
   }
 
   public saveSession = async (userId: string, userRole: USER_ROLES) => {

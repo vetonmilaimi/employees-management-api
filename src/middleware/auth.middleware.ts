@@ -2,7 +2,7 @@ import { NextFunction } from 'connect'
 import TokenService from '../services/token.service'
 import UserService from '../services/user.service'
 import { Request, Response } from 'express'
-import { ExpiredAccessToken, ExpiredRefreshToken, InvalidAccessToken, InvalidRefreshToken } from '../utils/exceptions'
+import { ExpiredAccessToken, ExpiredRefreshToken, InvalidAccessToken, InvalidRefreshToken, UnAuthorized } from '../utils/exceptions'
 import { UserSession } from '../utils/types'
 import { Entity, EntityId } from 'redis-om'
 import { USER_ROLES } from '../utils/constants'
@@ -64,6 +64,14 @@ class Auth {
       throw new ExpiredRefreshToken()
     }
     req.session = userSession
+    next()
+  }
+
+  public superAdminGuard = async (req: Request, _res: Response, next: NextFunction) => {
+    if (req.session.userRole !== USER_ROLES.SUPER_ADMIN) {
+      throw new UnAuthorized()
+    }
+
     next()
   }
 }

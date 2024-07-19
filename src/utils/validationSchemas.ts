@@ -14,6 +14,10 @@ class ValidationSchemas {
     password: Joi.string().required(),
   })
 
+  static mongoId = Joi.object({
+    _id: Joi.string().required(),
+  })
+
   static accessToken = Joi.object({
     'access-token': Joi.string().required(),
   })
