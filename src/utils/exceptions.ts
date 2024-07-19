@@ -133,3 +133,13 @@ export class UnAuthorized extends BaseError {
     super()
   }
 }
+
+export class SuperAdminCannotBeDeleted extends BaseError {
+  name = 'Super Admin Cannot Be Deleted'
+  message = 'Super Admin Cannot Be Deleted'
+  statusCode = 400
+
+  constructor() {
+    super()
+  }
+}

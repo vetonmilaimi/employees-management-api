@@ -3,7 +3,8 @@ import BaseResponse from '../utils/BaseResponse'
 import { IUserLoginRequest, IUserRegisterRequest } from '../utils/types'
 import UserService from '../services/user.service'
 import CryptService from '../services/crypt.service'
-import { LoginError, UserNotFoundError } from '../utils/exceptions'
+import { LoginError, SuperAdminCannotBeDeleted, UserNotFoundError } from '../utils/exceptions'
+import { USER_ROLES } from '../utils/constants'
 
 class UserController {
   private userService
@@ -25,6 +26,11 @@ class UserController {
 
   public delete = async (req: Request, res: Response) => {
     const id = req.query._id as string
+
+    const userToDelete = await this.userService.getUserById(id)
+    if (userToDelete?.role === USER_ROLES.SUPER_ADMIN) {
+      throw new SuperAdminCannotBeDeleted()
+    }
 
     const response = await this.userService.deleteUserById(id)
     return BaseResponse(res).success(response)
