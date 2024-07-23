@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import BaseResponse from '../utils/BaseResponse'
-import { IUserLoginRequest, IUserRegisterRequest } from '../utils/types'
+import { IUserInvitationRequest, IUserLoginRequest, IUserRegisterRequest } from '../utils/types'
 import UserService from '../services/user.service'
 import CryptService from '../services/crypt.service'
 import { LoginError, SuperAdminCannotBeDeleted, UserNotFoundError } from '../utils/exceptions'
@@ -34,6 +34,13 @@ class UserController {
 
     const response = await this.userService.deleteUserById(id)
     return BaseResponse(res).success(response)
+  }
+
+  public inviteUser = async (req: Request<object, object, IUserInvitationRequest>, res: Response) => {
+    const { email, firstName, lastName } = req.body
+
+    const newUser = await this.userService.create({ email, firstName, lastName })
+    return BaseResponse(res).success(newUser)
   }
 
   public register = async (req: Request<object, object, IUserRegisterRequest>, res: Response) => {

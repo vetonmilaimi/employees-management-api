@@ -23,4 +23,13 @@ router.delete(
   controllers.user.delete
 )
 
+router.post(
+  '/user-invite',
+  validator.headers(ValidationSchemas.accessToken),
+  validator.body(ValidationSchemas.inviteUser),
+  authMiddleware.validateAccessToken,
+  authMiddleware.superAdminGuard,
+  controllers.user.inviteUser
+)
+
 export default router

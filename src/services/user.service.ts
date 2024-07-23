@@ -1,6 +1,6 @@
 import UserModel from '../models/db/user.model'
 import { SuperAdminCredentials, USER_ROLES } from '../utils/constants'
-import { IUserRegisterRequest } from '../utils/types'
+import { IUserInvitationRequest, IUserRegisterRequest } from '../utils/types'
 import CryptService from './crypt.service'
 import Redis from './redis.service'
 import TokenService from './token.service'
@@ -28,7 +28,7 @@ class UserService {
     return await UserModel.findByIdAndDelete(userId).lean().exec()
   }
 
-  public create = async (data: IUserRegisterRequest) => {
+  public create = async (data: IUserRegisterRequest | IUserInvitationRequest) => {
     return await UserModel.create(data)
   }
 

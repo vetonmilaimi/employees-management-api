@@ -18,7 +18,10 @@ const schema: Schema = new Schema(
       },
       match: [EMAIL_REGEX, 'Please fill a valid email address'],
     },
-    password: { type: String, required: true },
+    /*
+      Default password null because of invitations from super admin
+    */
+    password: { type: String, default: null },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     role: {

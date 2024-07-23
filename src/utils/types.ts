@@ -21,6 +21,7 @@ export interface IUser {
 
 export interface IUserRegisterRequest extends Omit<IUser, '_id' | 'role'> {}
 export interface IUserLoginRequest extends Pick<IUser, 'email' | 'password'> {}
+export interface IUserInvitationRequest extends Omit<IUser, '_id' | 'role' | 'password'> {}
 
 export interface IOrganization {
   _id: string

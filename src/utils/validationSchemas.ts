@@ -9,6 +9,12 @@ class ValidationSchemas {
     lastName: Joi.string().required(),
   })
 
+  static inviteUser = Joi.object({
+    email: Joi.string().email().required(),
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
+  })
+
   static login = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
