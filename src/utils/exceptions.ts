@@ -84,6 +84,16 @@ export class UserNotFoundError extends BaseError {
   }
 }
 
+export class UserExistsError extends BaseError {
+  name = 'user-exists-error'
+  message = 'This user does exist'
+  statusCode = 409
+
+  constructor() {
+    super()
+  }
+}
+
 export class InvalidAccessToken extends BaseError {
   name = 'invalid-access-token'
   message = 'Access Token is not valid'

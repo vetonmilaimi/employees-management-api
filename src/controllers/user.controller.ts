@@ -3,7 +3,7 @@ import BaseResponse from '../utils/BaseResponse'
 import { IUserInvitationRequest, IUserLoginRequest, IUserRegisterRequest } from '../utils/types'
 import UserService from '../services/user.service'
 import CryptService from '../services/crypt.service'
-import { LoginError, SuperAdminCannotBeDeleted, UserNotFoundError } from '../utils/exceptions'
+import { LoginError, SuperAdminCannotBeDeleted, UserExistsError, UserNotFoundError } from '../utils/exceptions'
 import { USER_ROLES } from '../utils/constants'
 
 class UserController {
@@ -39,12 +39,22 @@ class UserController {
   public inviteUser = async (req: Request<object, object, IUserInvitationRequest>, res: Response) => {
     const { email, firstName, lastName } = req.body
 
+    const user = await this.userService.getUserByEmail(email)
+    if (user) {
+      throw new UserExistsError()
+    }
+
     const newUser = await this.userService.create({ email, firstName, lastName })
     return BaseResponse(res).success(newUser)
   }
 
   public register = async (req: Request<object, object, IUserRegisterRequest>, res: Response) => {
     const { email, firstName, lastName, password } = req.body
+
+    const user = await this.userService.getUserByEmail(email)
+    if (user) {
+      throw new UserExistsError()
+    }
 
     const newUser = await this.userService.create({ email, firstName, lastName, password: CryptService.hash(password) })
     return BaseResponse(res).success(newUser)
