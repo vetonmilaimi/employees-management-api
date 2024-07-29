@@ -17,11 +17,13 @@ export interface IUser {
   firstName: string
   lastName: string
   role: USER_ROLES
+  activated: boolean
+  activateToken?: string
 }
 
 export interface IUserRegisterRequest extends Omit<IUser, '_id' | 'role'> {}
 export interface IUserLoginRequest extends Pick<IUser, 'email' | 'password'> {}
-export interface IUserInvitationRequest extends Omit<IUser, '_id' | 'role' | 'password'> {}
+export interface IUserInvitationRequest extends Pick<IUser, 'email' | 'firstName' | 'lastName'> {}
 
 export interface IOrganization {
   _id: string

@@ -33,6 +33,8 @@ const schema: Schema = new Schema(
       */
       default: USER_ROLES.ADMIN,
     },
+    activated: { type: Boolean, default: false },
+    activateToken: { type: String, default: null },
 
     __v: { type: Number, select: false },
   },

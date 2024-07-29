@@ -66,6 +66,7 @@ class UserService {
       lastName: SuperAdminCredentials.last_name,
       password: CryptService.hash(SuperAdminCredentials.password),
       role: USER_ROLES.SUPER_ADMIN,
+      activated: true,
     })
   }
 }
