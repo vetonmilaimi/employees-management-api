@@ -6,6 +6,9 @@ declare global {
   namespace Express {
     export interface Request {
       session: UserSession
+      activate: {
+        email: string
+      }
     }
   }
 

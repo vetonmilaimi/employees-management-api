@@ -28,6 +28,22 @@ class Auth {
     }
   }
 
+  public validateActivateToken = async (req: Request, _res: Response, next: NextFunction) => {
+    const token = (req.headers['activate-token'] as string) || ''
+
+    const decoded = this.tokenService.jwtVerify(token) as { email: string }
+
+    const user = await this.userService.getUserByEmail(decoded?.email)
+
+    if (!user?.activateToken || user.activateToken !== token) {
+      throw new InvalidAccessToken()
+    }
+
+    req.activate = { email: decoded.email }
+
+    next()
+  }
+
   public validateAccessToken = async (req: Request, _res: Response, next: NextFunction) => {
     const accessToken = (req.headers['access-token'] as string) || ''
 

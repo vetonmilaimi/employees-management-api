@@ -36,6 +36,10 @@ class UserService {
     return await UserModel.find({}).lean().exec()
   }
 
+  public createPassword = async (_id: string, password: string) => {
+    return await UserModel.findByIdAndUpdate(_id, { password, activated: true, activateToken: null })
+  }
+
   public saveSession = async (userId: string, userRole: USER_ROLES) => {
     return await this.sessionRepo.save({
       userId: userId,

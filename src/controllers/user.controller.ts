@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import BaseResponse from '../utils/BaseResponse'
-import { IUserInvitationRequest, IUserLoginRequest, IUserRegisterRequest } from '../utils/types'
+import { IUserCreatePasswordRequest, IUserInvitationRequest, IUserLoginRequest, IUserRegisterRequest } from '../utils/types'
 import UserService from '../services/user.service'
 import CryptService from '../services/crypt.service'
 import { LoginError, SuperAdminCannotBeDeleted, UserExistsError, UserNotFoundError } from '../utils/exceptions'
@@ -47,10 +47,25 @@ class UserController {
       throw new UserExistsError()
     }
 
-    const token = this.tokenService.generateToken()
+    const token = this.tokenService.jwtSign({ email }, { expiresIn: 60 * 60 * 24 * 10 }) // 10 days validation
     const newUser = await this.userService.create({ email, firstName, lastName, activateToken: token })
 
     return BaseResponse(res).success(newUser)
+  }
+
+  public activate = async (req: Request<object, object, IUserCreatePasswordRequest>, res: Response) => {
+    const { email } = req.activate
+    const { password } = req.body
+
+    const user = await this.userService.getUserByEmail(email)
+
+    if (!user) {
+      throw new UserNotFoundError()
+    }
+
+    const updatedUser = await this.userService.createPassword(user._id, CryptService.hash(password))
+
+    return BaseResponse(res).success(updatedUser)
   }
 
   public register = async (req: Request<object, object, IUserRegisterRequest>, res: Response) => {

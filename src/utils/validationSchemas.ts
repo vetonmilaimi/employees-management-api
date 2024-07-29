@@ -15,6 +15,10 @@ class ValidationSchemas {
     lastName: Joi.string().required(),
   })
 
+  static activateAccount = Joi.object({
+    password: Joi.string().regex(PASSWORD_REGEX).required(),
+  })
+
   static login = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
@@ -26,6 +30,10 @@ class ValidationSchemas {
 
   static accessToken = Joi.object({
     'access-token': Joi.string().required(),
+  })
+
+  static activateToken = Joi.object({
+    'activate-token': Joi.string().required(),
   })
 
   static headerTokens = Joi.object({

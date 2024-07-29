@@ -19,4 +19,12 @@ router.get(
 
 router.get('/logout', validator.headers(ValidationSchemas.accessToken), authMiddleware.validateAccessToken, controllers.user.logout)
 
+router.post(
+  '/activate',
+  validator.headers(ValidationSchemas.activateToken),
+  validator.body(ValidationSchemas.activateAccount),
+  authMiddleware.validateActivateToken,
+  controllers.user.activate
+)
+
 export default router
