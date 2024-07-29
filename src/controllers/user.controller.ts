@@ -4,13 +4,16 @@ import { IUserInvitationRequest, IUserLoginRequest, IUserRegisterRequest } from 
 import UserService from '../services/user.service'
 import CryptService from '../services/crypt.service'
 import { LoginError, SuperAdminCannotBeDeleted, UserExistsError, UserNotFoundError } from '../utils/exceptions'
-import { USER_ROLES } from '../utils/constants'
+import { CLIENT_URL, USER_ROLES } from '../utils/constants'
+import TokenService from '../services/token.service'
 
 class UserController {
   private userService
+  private tokenService
 
   constructor() {
     this.userService = new UserService()
+    this.tokenService = new TokenService()
   }
 
   public me = async (req: Request, res: Response) => {
@@ -45,7 +48,14 @@ class UserController {
     }
 
     const newUser = await this.userService.create({ email, firstName, lastName })
-    return BaseResponse(res).success(newUser)
+
+    let token: string | undefined
+
+    if (newUser) {
+      token = this.tokenService.generateToken()
+    }
+
+    return BaseResponse(res).success({ url: `${CLIENT_URL}/verify?token=${token}`, newUser })
   }
 
   public register = async (req: Request<object, object, IUserRegisterRequest>, res: Response) => {
