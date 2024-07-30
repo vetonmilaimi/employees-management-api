@@ -73,6 +73,8 @@ typings/
 /build
 /dist
 
+*./zip
+
 # misc
 .DS_Store
 .env
