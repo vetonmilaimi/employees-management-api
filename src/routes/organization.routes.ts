@@ -8,9 +8,10 @@ const router = Router()
 
 router.post(
   '/create',
-  validator.headers(ValidationSchemas.headerTokens),
+  validator.headers(ValidationSchemas.accessToken),
   validator.body(ValidationSchemas.createOrganization),
   authMiddleware.validateAccessToken,
+  authMiddleware.adminGuard,
   controllers.organization.create
 )
 

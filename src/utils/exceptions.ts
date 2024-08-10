@@ -153,3 +153,13 @@ export class SuperAdminCannotBeDeleted extends BaseError {
     super()
   }
 }
+
+export class OneOrganizationAllowed extends BaseError {
+  name = 'Just one organization allowed'
+  message = 'Just one organization allowed'
+  statusCode = 509
+
+  constructor() {
+    super()
+  }
+}

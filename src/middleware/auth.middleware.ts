@@ -90,6 +90,14 @@ class Auth {
 
     next()
   }
+
+  public adminGuard = async (req: Request, _res: Response, next: NextFunction) => {
+    if (req.session.userRole !== USER_ROLES.ADMIN) {
+      throw new UnAuthorized()
+    }
+
+    next()
+  }
 }
 
 export default new Auth()
