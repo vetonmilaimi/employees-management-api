@@ -15,4 +15,21 @@ router.post(
   controllers.organization.create
 )
 
+router.delete(
+  '/delete',
+  validator.headers(ValidationSchemas.accessToken),
+  validator.query(ValidationSchemas.mongoId),
+  authMiddleware.validateAccessToken,
+  authMiddleware.adminGuard,
+  controllers.organization.delete
+)
+
+router.get(
+  '/about',
+  validator.headers(ValidationSchemas.accessToken),
+  authMiddleware.validateAccessToken,
+  authMiddleware.adminGuard,
+  controllers.organization.about
+)
+
 export default router

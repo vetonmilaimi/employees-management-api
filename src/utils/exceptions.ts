@@ -163,3 +163,23 @@ export class OneOrganizationAllowed extends BaseError {
     super()
   }
 }
+
+export class CannotFindOrganization extends BaseError {
+  name = 'Cannot find organization for this admin'
+  message = 'Cannot find organization for this admin'
+  statusCode = 404
+
+  constructor() {
+    super()
+  }
+}
+
+export class OrganizationDoesNotExist extends BaseError {
+  name = 'This organization does not exist'
+  message = 'This organization does not exist'
+  statusCode = 404
+
+  constructor() {
+    super()
+  }
+}
