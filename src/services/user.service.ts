@@ -60,7 +60,7 @@ class UserService {
   }
 
   public static checkSuperAdmin = async () => {
-    const hasSuperAdmin = await UserModel.findOne({ role: USER_ROLES.SUPER_ADMIN })
+    const hasSuperAdmin = await UserModel.findOne({ role: USER_ROLES.ADMIN }).lean().exec()
     if (hasSuperAdmin) {
       return
     }
@@ -69,7 +69,7 @@ class UserService {
       firstName: SuperAdminCredentials.first_name,
       lastName: SuperAdminCredentials.last_name,
       password: CryptService.hash(SuperAdminCredentials.password),
-      role: USER_ROLES.SUPER_ADMIN,
+      role: USER_ROLES.ADMIN,
       activated: true,
     })
   }

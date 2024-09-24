@@ -11,7 +11,7 @@ router.post(
   validator.headers(ValidationSchemas.accessToken),
   validator.body(ValidationSchemas.createOrganization),
   authMiddleware.validateAccessToken,
-  authMiddleware.adminGuard,
+  authMiddleware.managerGuard,
   controllers.organization.create
 )
 
@@ -20,7 +20,7 @@ router.delete(
   validator.headers(ValidationSchemas.accessToken),
   validator.query(ValidationSchemas.mongoId),
   authMiddleware.validateAccessToken,
-  authMiddleware.adminGuard,
+  authMiddleware.managerGuard,
   controllers.organization.delete
 )
 
@@ -28,7 +28,7 @@ router.get(
   '/about',
   validator.headers(ValidationSchemas.accessToken),
   authMiddleware.validateAccessToken,
-  authMiddleware.adminGuard,
+  authMiddleware.managerGuard,
   controllers.organization.about
 )
 

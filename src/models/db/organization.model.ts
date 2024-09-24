@@ -5,7 +5,7 @@ const schema: Schema = new Schema(
   {
     name: { type: String, required: true },
     description: { type: String },
-    admins: [{ type: Schema.Types.ObjectId, ref: 'users' }],
+    users: [{ type: Schema.Types.ObjectId, ref: 'users' }],
   },
   { timestamps: true }
 )

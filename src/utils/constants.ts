@@ -13,8 +13,9 @@ export const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A
 export const EMAIL_REGEX = /^[a-zA-Z0-9_.+]+(?<!^[0-9]*)@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
 
 export enum USER_ROLES {
-  SUPER_ADMIN = 'super_admin',
   ADMIN = 'admin',
+  MANAGER = 'manager',
+  USER = 'user',
 }
 
 export const SuperAdminCredentials = {

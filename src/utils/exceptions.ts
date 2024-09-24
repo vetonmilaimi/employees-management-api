@@ -144,9 +144,9 @@ export class UnAuthorized extends BaseError {
   }
 }
 
-export class SuperAdminCannotBeDeleted extends BaseError {
-  name = 'Super Admin Cannot Be Deleted'
-  message = 'Super Admin Cannot Be Deleted'
+export class AdminCannotBeDeleted extends BaseError {
+  name = 'Admin Cannot Be Deleted'
+  message = 'Admin Cannot Be Deleted'
   statusCode = 400
 
   constructor() {

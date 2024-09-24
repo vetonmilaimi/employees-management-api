@@ -10,7 +10,7 @@ router.get(
   '/list-users',
   validator.headers(ValidationSchemas.accessToken),
   authMiddleware.validateAccessToken,
-  authMiddleware.superAdminGuard,
+  authMiddleware.adminGuard,
   controllers.user.list
 )
 
@@ -19,7 +19,7 @@ router.delete(
   validator.headers(ValidationSchemas.accessToken),
   validator.query(ValidationSchemas.mongoId),
   authMiddleware.validateAccessToken,
-  authMiddleware.superAdminGuard,
+  authMiddleware.adminGuard,
   controllers.user.delete
 )
 
@@ -28,7 +28,7 @@ router.post(
   validator.headers(ValidationSchemas.accessToken),
   validator.body(ValidationSchemas.inviteUser),
   authMiddleware.validateAccessToken,
-  authMiddleware.superAdminGuard,
+  authMiddleware.adminGuard,
   controllers.user.inviteUser
 )
 

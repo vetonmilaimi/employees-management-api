@@ -19,7 +19,7 @@ const schema: Schema = new Schema(
       match: [EMAIL_REGEX, 'Please fill a valid email address'],
     },
     /*
-      Default password null because of invitations from super admin
+      Default password null because of invitations from admin
     */
     password: { type: String, default: null },
     firstName: { type: String, required: true },
@@ -31,7 +31,7 @@ const schema: Schema = new Schema(
         Because for now we don't need user the default role 
         should be admin because it's the lowest role
       */
-      default: USER_ROLES.ADMIN,
+      default: USER_ROLES.USER,
     },
     activated: { type: Boolean, default: false },
     activateToken: { type: String, default: null },

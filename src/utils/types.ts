@@ -30,7 +30,7 @@ export interface IOrganization {
   _id: string
   name: string
   description?: string
-  admins: string[]
+  users: string[]
 }
 
-export interface IOrganizationCreateReq extends Omit<IOrganization, '_id' | 'admins'> {}
+export interface IOrganizationCreateReq extends Omit<IOrganization, '_id' | 'users'> {}

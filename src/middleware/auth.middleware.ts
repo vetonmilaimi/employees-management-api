@@ -83,16 +83,16 @@ class Auth {
     next()
   }
 
-  public superAdminGuard = async (req: Request, _res: Response, next: NextFunction) => {
-    if (req.session.userRole !== USER_ROLES.SUPER_ADMIN) {
+  public adminGuard = async (req: Request, _res: Response, next: NextFunction) => {
+    if (req.session.userRole !== USER_ROLES.ADMIN) {
       throw new UnAuthorized()
     }
 
     next()
   }
 
-  public adminGuard = async (req: Request, _res: Response, next: NextFunction) => {
-    if (req.session.userRole !== USER_ROLES.ADMIN) {
+  public managerGuard = async (req: Request, _res: Response, next: NextFunction) => {
+    if (req.session.userRole !== USER_ROLES.MANAGER) {
       throw new UnAuthorized()
     }
 
