@@ -47,8 +47,8 @@ class UserController {
       throw new UserExistsError()
     }
 
-    const token = this.tokenService.jwtSign({ email }, { expiresIn: 60 * 60 * 24 * 10 }) // 10 days validation
-    const newUser = await this.userService.create({ email, firstName, lastName, activateToken: token })
+    const token = this.tokenService.jwtSign({ email }, { expiresIn: 60 * 60 * 24 * 7 }) // 7 days validation
+    const newUser = await this.userService.create({ email, firstName, lastName, activateToken: token, role: USER_ROLES.MANAGER })
 
     return BaseResponse(res).success(newUser)
   }
@@ -76,7 +76,7 @@ class UserController {
       throw new UserExistsError()
     }
 
-    const newUser = await this.userService.create({ email, firstName, lastName, password: CryptService.hash(password) })
+    const newUser = await this.userService.create({ email, firstName, lastName, password: CryptService.hash(password), role: USER_ROLES.USER })
     return BaseResponse(res).success(newUser)
   }
 
