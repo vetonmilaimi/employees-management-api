@@ -41,7 +41,7 @@ class ValidationSchemas {
     'refresh-token': Joi.string().required(),
   })
 
-  static createOrganization = Joi.object({
+  static organizationBody = Joi.object({
     name: Joi.string().required(),
     description: Joi.string().optional(),
   })

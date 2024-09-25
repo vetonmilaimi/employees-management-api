@@ -2,24 +2,30 @@ import OrganizationModel from '../models/db/organization.model'
 import { IOrganizationCreateReq } from '../utils/types'
 
 class OrganizationService {
-  public create = async (data: IOrganizationCreateReq, adminId: string) => {
-    return await OrganizationModel.create({ ...data, admins: [adminId] })
+  public create = async (data: IOrganizationCreateReq, managerId: string) => {
+    return await OrganizationModel.create({ ...data, users: [managerId] })
   }
 
   public findById = async (organizationId: string) => {
-    return await OrganizationModel.findById(organizationId)
+    return await OrganizationModel.findById(organizationId).lean().exec()
+  }
+
+  public findByIdAndUpdate = async (organizationId: string, data: object) => {
+    return await OrganizationModel.findByIdAndUpdate(organizationId, data).lean().exec()
   }
 
   public findOne = async (data: object) => {
-    return await OrganizationModel.findOne(data)
+    return await OrganizationModel.findOne(data).lean().exec()
   }
 
-  public findByAdminId = async (adminId: string) => {
+  public findByManagerId = async (adminId: string) => {
     return await OrganizationModel.findOne({
-      admins: {
+      users: {
         $in: [adminId],
       },
     })
+      .lean()
+      .exec()
   }
 
   public delete = async (organizationId: string) => {

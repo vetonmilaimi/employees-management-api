@@ -9,20 +9,34 @@ const router = Router()
 router.post(
   '/create',
   validator.headers(ValidationSchemas.accessToken),
-  validator.body(ValidationSchemas.createOrganization),
+  validator.body(ValidationSchemas.organizationBody),
   authMiddleware.validateAccessToken,
   authMiddleware.managerGuard,
   controllers.organization.create
 )
 
-router.delete(
-  '/delete',
+router.post(
+  '/update',
   validator.headers(ValidationSchemas.accessToken),
-  validator.query(ValidationSchemas.mongoId),
+  validator.body(ValidationSchemas.organizationBody),
   authMiddleware.validateAccessToken,
   authMiddleware.managerGuard,
-  controllers.organization.delete
+  controllers.organization.update
 )
+
+/* 
+  We don't need this route for delete an organization
+  just because manager can have only one organization
+  and also he can update if he made a mistake
+*/
+// router.delete(
+//   '/delete',
+//   validator.headers(ValidationSchemas.accessToken),
+//   validator.query(ValidationSchemas.mongoId),
+//   authMiddleware.validateAccessToken,
+//   authMiddleware.managerGuard,
+//   controllers.organization.delete
+// )
 
 router.get(
   '/about',

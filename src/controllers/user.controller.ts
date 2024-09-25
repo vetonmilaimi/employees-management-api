@@ -17,7 +17,7 @@ class UserController {
   }
 
   public me = async (req: Request, res: Response) => {
-    // Handle this response
+    //TODO: Handle this response
     return BaseResponse(res).success({})
   }
 
