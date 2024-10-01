@@ -165,8 +165,8 @@ export class OneOrganizationAllowed extends BaseError {
 }
 
 export class CannotFindOrganization extends BaseError {
-  name = 'Cannot find organization for this admin'
-  message = 'Cannot find organization for this admin'
+  name = 'Cannot find organization for this user'
+  message = 'Cannot find organization for this user'
   statusCode = 404
 
   constructor() {

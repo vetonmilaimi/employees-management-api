@@ -23,7 +23,7 @@ class OrganizationController {
     return BaseResponse(res).success(response)
   }
 
-  public update = async (req: Request<object, { id: string }, IOrganizationCreateReq>, res: Response) => {
+  public update = async (req: Request<object, object, IOrganizationCreateReq>, res: Response) => {
     const managerId = req.session.userId
 
     const organization = await this.organizationService.findByManagerId(managerId)

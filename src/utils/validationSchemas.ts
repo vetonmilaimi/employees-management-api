@@ -43,7 +43,7 @@ class ValidationSchemas {
 
   static organizationBody = Joi.object({
     name: Joi.string().required(),
-    description: Joi.string().optional(),
+    description: Joi.string().optional().allow(''),
   })
 }
 
