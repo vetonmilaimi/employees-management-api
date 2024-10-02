@@ -1,5 +1,5 @@
 import UserModel from '../models/db/user.model'
-import { SuperAdminCredentials, USER_ROLES } from '../utils/constants'
+import { AdminCredentials, USER_ROLES } from '../utils/constants'
 import { IUserInvitationRequest, IUserRegisterRequest } from '../utils/types'
 import CryptService from './crypt.service'
 import Redis from './redis.service'
@@ -65,10 +65,10 @@ class UserService {
       return
     }
     await UserModel.create({
-      email: SuperAdminCredentials.email,
-      firstName: SuperAdminCredentials.first_name,
-      lastName: SuperAdminCredentials.last_name,
-      password: CryptService.hash(SuperAdminCredentials.password),
+      email: AdminCredentials.email,
+      firstName: AdminCredentials.first_name,
+      lastName: AdminCredentials.last_name,
+      password: CryptService.hash(AdminCredentials.password),
       role: USER_ROLES.ADMIN,
       activated: true,
     })

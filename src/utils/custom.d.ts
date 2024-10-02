@@ -20,10 +20,10 @@ declare global {
       HOST: string
       DB_URL: string
       REDIS_URL: string
-      SUPER_ADMIN_EMAIL: string
-      SUPER_ADMIN_PWD: string
-      SUPER_ADMIN_FIRST_NAME: string
-      SUPER_ADMIN_LAST_NAME: string
+      ADMIN_EMAIL: string
+      ADMIN_PWD: string
+      ADMIN_FIRST_NAME: string
+      ADMIN_LAST_NAME: string
       SALT_ROUNDS: string
       BASE_API_URL: string
       JWT_KEY: string

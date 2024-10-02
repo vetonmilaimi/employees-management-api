@@ -18,9 +18,9 @@ export enum USER_ROLES {
   USER = 'user',
 }
 
-export const SuperAdminCredentials = {
-  email: process.env.SUPER_ADMIN_EMAIL || '',
-  password: process.env.SUPER_ADMIN_PWD || '',
-  first_name: process.env.SUPER_ADMIN_FIRST_NAME || '',
-  last_name: process.env.SUPER_ADMIN_LAST_NAME || '',
+export const AdminCredentials = {
+  email: process.env.ADMIN_EMAIL || '',
+  password: process.env.ADMIN_PWD || '',
+  first_name: process.env.ADMIN_FIRST_NAME || '',
+  last_name: process.env.ADMIN_LAST_NAME || '',
 }
