@@ -15,7 +15,7 @@ export const EMAIL_REGEX = /^[a-zA-Z0-9_.+]+(?<!^[0-9]*)@[a-zA-Z0-9-]+\.[a-zA-Z0
 export enum USER_ROLES {
   ADMIN = 'admin',
   MANAGER = 'manager',
-  USER = 'user',
+  USER = 'user', // => This is employee
 }
 
 export const AdminCredentials = {

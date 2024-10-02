@@ -18,10 +18,10 @@ class OrganizationService {
     return await OrganizationModel.findOne(data).lean().exec()
   }
 
-  public findByManagerId = async (adminId: string) => {
+  public findByUserId = async (userId: string) => {
     return await OrganizationModel.findOne({
       users: {
-        $in: [adminId],
+        $in: [userId],
       },
     })
       .lean()
