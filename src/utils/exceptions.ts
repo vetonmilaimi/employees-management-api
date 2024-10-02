@@ -94,6 +94,16 @@ export class UserExistsError extends BaseError {
   }
 }
 
+export class UserExistsOnOrganizationError extends BaseError {
+  name = 'user-exists-on-organization-error'
+  message = 'This user does exist on this organization'
+  statusCode = 409
+
+  constructor() {
+    super()
+  }
+}
+
 export class InvalidAccessToken extends BaseError {
   name = 'invalid-access-token'
   message = 'Access Token is not valid'

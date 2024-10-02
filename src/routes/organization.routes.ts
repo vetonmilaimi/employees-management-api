@@ -46,4 +46,13 @@ router.get(
   controllers.organization.about
 )
 
+router.post(
+  '/add-employee',
+  validator.headers(ValidationSchemas.accessToken),
+  validator.body(ValidationSchemas.inviteUser),
+  authMiddleware.validateAccessToken,
+  authMiddleware.managerGuard,
+  controllers.organization.addEmployee
+)
+
 export default router
