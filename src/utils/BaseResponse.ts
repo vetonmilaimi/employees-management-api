@@ -10,7 +10,9 @@ class BaseResponse {
   }
 
   private handleError(err: unknown) {
-    console.log(err)
+    if (process.env.NODE_ENV === 'development') {
+      console.log(err)
+    }
     let errOccurred
     if (err instanceof BaseError) {
       errOccurred = err

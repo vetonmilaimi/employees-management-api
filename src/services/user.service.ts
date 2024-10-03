@@ -59,9 +59,9 @@ class UserService {
     return await this.sessionRepo.search().where('accessToken').equalTo(accessToken).return.first()
   }
 
-  public static checkSuperAdmin = async () => {
-    const hasSuperAdmin = await UserModel.findOne({ role: USER_ROLES.ADMIN }).lean().exec()
-    if (hasSuperAdmin) {
+  public static checkAdmin = async () => {
+    const hasAdmin = await UserModel.findOne({ role: USER_ROLES.ADMIN }).lean().exec()
+    if (hasAdmin) {
       return
     }
     await UserModel.create({
