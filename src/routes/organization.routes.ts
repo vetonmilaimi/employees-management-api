@@ -55,4 +55,12 @@ router.post(
   controllers.organization.addEmployee
 )
 
+router.get(
+  '/list-employees',
+  validator.headers(ValidationSchemas.accessToken),
+  authMiddleware.validateAccessToken,
+  authMiddleware.managerGuard,
+  controllers.organization.listEmployees
+)
+
 export default router

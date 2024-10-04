@@ -69,6 +69,18 @@ class OrganizationController {
     return BaseResponse(res).success(await this.organizationService.findByIdAndUpdate(organization._id, organization))
   }
 
+  public listEmployees = async (req: Request, res: Response) => {
+    const organization = await this.organizationService.findByUserId(req.session.userId)
+
+    if (!organization) {
+      throw new CannotFindOrganization()
+    }
+
+    const employees = await this.userService.list({ _id: { $in: organization.users } })
+
+    return BaseResponse(res).success(employees)
+  }
+
   // public delete = async (req: Request, res: Response) => {
   //   const id = req.query._id as string
   //   if (!(await this.organizationService.findById(id))) {

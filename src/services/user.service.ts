@@ -32,8 +32,8 @@ class UserService {
     return await UserModel.create(data)
   }
 
-  public list = async () => {
-    return await UserModel.find({}).lean().exec()
+  public list = async (data: object = {}) => {
+    return await UserModel.find(data).lean().exec()
   }
 
   public createPassword = async (_id: string, password: string) => {
