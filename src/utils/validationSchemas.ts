@@ -36,12 +36,20 @@ class ValidationSchemas {
     'activate-token': Joi.string().required(),
   })
 
+  static organizationId = Joi.object({
+    'organization-id': Joi.string().required(),
+  })
+
   static headerTokens = Joi.object({
     'access-token': Joi.string().required(),
     'refresh-token': Joi.string().required(),
   })
 
   static organizationBody = Joi.object({
+    name: Joi.string().required(),
+    description: Joi.string().optional().allow(''),
+  })
+  static projectBody = Joi.object({
     name: Joi.string().required(),
     description: Joi.string().optional().allow(''),
   })

@@ -1,4 +1,4 @@
-import { UserSession } from './types'
+import { IOrganization, UserSession } from './types'
 
 export {}
 
@@ -6,6 +6,7 @@ declare global {
   namespace Express {
     export interface Request {
       session: UserSession
+      organization: IOrganization
       activate: {
         email: string
       }

@@ -34,5 +34,13 @@ export interface IOrganization {
 }
 
 export interface IOrganizationCreateReq extends Omit<IOrganization, '_id' | 'users'> {}
-
 export interface IEmployeeAddReq extends Pick<IUser, 'email' | 'firstName' | 'lastName'> {}
+
+export interface IProject {
+  _id: string
+  name: string
+  organization: string
+  description?: string
+}
+
+export interface IProjectCreateReq extends Omit<IProject, '_id' | 'organization'> {}

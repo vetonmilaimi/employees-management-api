@@ -1,4 +1,5 @@
 import { OrganizationControllerType } from './organization.controller'
+import { ProjectControllerType } from './project.controller'
 import { UserControllerType } from './user.controller'
 
 class Controllers {
@@ -14,6 +15,10 @@ class Controllers {
 
   get organization() {
     return this.loadController('organization.controller') as OrganizationControllerType
+  }
+
+  get project() {
+    return this.loadController('project.controller') as ProjectControllerType
   }
 }
 

@@ -193,3 +193,13 @@ export class OrganizationDoesNotExist extends BaseError {
     super()
   }
 }
+
+export class ProjectNotFoundError extends BaseError {
+  name = 'project-not-found-error'
+  message = "Project doesn't exist"
+  statusCode = 404
+
+  constructor() {
+    super()
+  }
+}

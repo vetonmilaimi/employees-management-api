@@ -10,7 +10,7 @@ class OrganizationService {
     return await OrganizationModel.findById(organizationId).lean().exec()
   }
 
-  public findByIdAndUpdate = async (organizationId: string, data: object) => {
+  public findByIdAndUpdate = async (organizationId: string, data: IOrganizationCreateReq) => {
     return await OrganizationModel.findByIdAndUpdate(organizationId, data).lean().exec()
   }
 
