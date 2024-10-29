@@ -96,7 +96,8 @@ class OrganizationController {
     const organization = await this.organizationService.findByUserId(req.session.userId)
 
     if (!organization) {
-      throw new CannotFindOrganization()
+      return BaseResponse(res).success(null)
+      // throw new CannotFindOrganization()
     }
 
     return BaseResponse(res).success(organization)
