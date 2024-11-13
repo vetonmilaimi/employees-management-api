@@ -18,6 +18,12 @@ class OrganizationController {
     this.tokenService = new TokenService()
   }
 
+  public listOrganizations = async (req: Request, res: Response) => {
+    const organizations = await this.organizationService.listOrganizations()
+
+    return BaseResponse(res).success(organizations)
+  }
+
   public create = async (req: Request<object, object, IOrganizationCreateReq>, res: Response) => {
     const organization = await this.organizationService.findByUserId(req.session.userId)
 

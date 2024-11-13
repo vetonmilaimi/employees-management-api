@@ -14,6 +14,14 @@ router.get(
   controllers.user.list
 )
 
+router.get(
+  '/list-organizations',
+  validator.headers(ValidationSchemas.accessToken),
+  authMiddleware.validateAccessToken,
+  authMiddleware.adminGuard,
+  controllers.organization.listOrganizations
+)
+
 router.delete(
   '/user-delete',
   validator.headers(ValidationSchemas.accessToken),
