@@ -44,6 +44,7 @@ class OrganizationService {
     return await OrganizationModel.find()
       .populate({
         path: 'users',
+        select: '-password -activateToken -activated',
         match: { role: USER_ROLES.MANAGER },
       })
       .lean()

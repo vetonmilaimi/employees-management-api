@@ -21,7 +21,7 @@ class UserService {
   }
 
   public getUserById = async (userId: string) => {
-    return await UserModel.findById(userId).lean().exec()
+    return await UserModel.findById(userId).select('-password').lean().exec()
   }
 
   public deleteUserById = async (userId: string) => {
@@ -33,7 +33,7 @@ class UserService {
   }
 
   public list = async (data: object = {}) => {
-    return await UserModel.find(data).lean().exec()
+    return await UserModel.find(data).select('-password').lean().exec()
   }
 
   public createPassword = async (_id: string, password: string) => {
@@ -60,7 +60,7 @@ class UserService {
   }
 
   public static checkAdmin = async () => {
-    const hasAdmin = await UserModel.findOne({ role: USER_ROLES.ADMIN }).lean().exec()
+    const hasAdmin = await UserModel.findOne({ role: USER_ROLES.ADMIN }).select('-password').lean().exec()
     if (hasAdmin) {
       return
     }
