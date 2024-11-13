@@ -19,7 +19,7 @@ class OrganizationController {
   }
 
   public listOrganizations = async (req: Request, res: Response) => {
-    const organizations = await this.organizationService.listOrganizations()
+    const organizations = await this.organizationService.listPopulatedOrganizationsWithManager()
 
     return BaseResponse(res).success(organizations)
   }

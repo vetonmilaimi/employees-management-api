@@ -1,4 +1,5 @@
 import OrganizationModel from '../models/db/organization.model'
+import { USER_ROLES } from '../utils/constants'
 import { IOrganizationCreateReq } from '../utils/types'
 
 class OrganizationService {
@@ -32,8 +33,21 @@ class OrganizationService {
     return await OrganizationModel.findByIdAndDelete(organizationId)
   }
 
-  public listOrganizations = async () => {
-    return await OrganizationModel.find().lean().exec()
+  // public listOrganizations = async () => {
+  //   return await OrganizationModel.find().lean().exec()
+  // }
+
+  /*
+      This method is used for populating the organizations with manager
+  */
+  public listPopulatedOrganizationsWithManager = async () => {
+    return await OrganizationModel.find()
+      .populate({
+        path: 'users',
+        match: { role: USER_ROLES.MANAGER },
+      })
+      .lean()
+      .exec()
   }
 }
 
