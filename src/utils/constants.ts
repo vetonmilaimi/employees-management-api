@@ -6,6 +6,11 @@ export const REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379'
 export const SALT_ROUNDS = process.env.SALT_ROUNDS || '10'
 export const JWT_SECRET = process.env.JWT_KEY || ''
 export const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:3000'
+export const MAILER_HOST = process.env.MAILER_HOST || ''
+export const MAILER_PORT = process.env.MAILER_PORT || ''
+export const MAILER_USER = process.env.MAILER_USER || ''
+export const MAILER_PASS = process.env.MAILER_PASS || ''
+export const MAILER_SECURE = process.env.MAILER_SECURE === 'true' ? true : false
 
 export const isProduction = NODE_ENV === 'production'
 

@@ -6,14 +6,17 @@ import CryptService from '../services/crypt.service'
 import { LoginError, AdminCannotBeDeleted, UserExistsError, UserNotFoundError } from '../utils/exceptions'
 import { USER_ROLES } from '../utils/constants'
 import TokenService from '../services/token.service'
+import MailerService from '../services/mailer.service'
 
 class UserController {
   private userService
   private tokenService
+  private mailerService
 
   constructor() {
     this.userService = new UserService()
     this.tokenService = new TokenService()
+    this.mailerService = new MailerService()
   }
 
   public me = async (req: Request, res: Response) => {
@@ -48,8 +51,9 @@ class UserController {
     }
 
     const token = this.tokenService.jwtSign({ email }, { expiresIn: 60 * 60 * 24 * 7 }) // 7 days validation
-    const newUser = await this.userService.create({ email, firstName, lastName, activateToken: token, role: USER_ROLES.MANAGER })
 
+    const newUser = await this.userService.create({ email, firstName, lastName, activateToken: token, role: USER_ROLES.MANAGER })
+    await this.mailerService.sendVerificationEmail(email, token)
     return BaseResponse(res).success(newUser)
   }
 
