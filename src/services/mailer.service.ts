@@ -1,7 +1,14 @@
 import nodemailer from 'nodemailer'
 import { CLIENT_URL, MAILER_HOST, MAILER_PASS, MAILER_PORT, MAILER_SECURE, MAILER_USER } from '../utils/constants'
+import TemplateService from './template.service'
 
 class MailerService {
+  private static SENDER = 'EMS Veton Milaimi'
+  private static SUBJECTS = {
+    activateAccount: 'Activate your account',
+    // resetPassword: 'Reset your password',
+  } as const
+
   private transporter = nodemailer.createTransport({
     service: 'gmail',
     host: MAILER_HOST,
@@ -14,15 +21,17 @@ class MailerService {
   })
 
   public sendVerificationEmail = async (emailTo: string, verificationToken: string) => {
+    const template = await TemplateService.getTemplate(TemplateService.TEMPLATE_NAMES.activateAccount, {
+      url: `${CLIENT_URL}`,
+      token: verificationToken,
+    })
+
     return await this.transporter.sendMail({
       from: 'EMS Veton Milaimi',
       to: emailTo,
       subject: 'Account Verification EMS Veton Milaimi',
       text: `To verify your account pease visit this link: ${CLIENT_URL}/activate?token=${verificationToken}`,
-      html: `<div>
-        <b>To verify your account pease press the button below</b>
-        <a href="${CLIENT_URL}/activate?token=${verificationToken}">Verify Account</a>
-      <div>`,
+      html: template,
     })
   }
 }
