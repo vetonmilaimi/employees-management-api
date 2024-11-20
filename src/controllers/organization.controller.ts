@@ -6,16 +6,19 @@ import { CannotFindOrganization, OneOrganizationAllowed, UserExistsOnOrganizatio
 import UserService from '../services/user.service'
 import { USER_ROLES } from '../utils/constants'
 import TokenService from '../services/token.service'
+import MailerService from '../services/mailer.service'
 
 class OrganizationController {
   private organizationService
   private userService
   private tokenService
+  private mailerService
 
   constructor() {
     this.organizationService = new OrganizationService()
     this.userService = new UserService()
     this.tokenService = new TokenService()
+    this.mailerService = new MailerService()
   }
 
   public listOrganizations = async (req: Request, res: Response) => {
@@ -71,6 +74,8 @@ class OrganizationController {
     const token = this.tokenService.jwtSign({ email }, { expiresIn: 60 * 60 * 24 * 7 }) // 7 days validation
 
     const newUser = await this.userService.create({ email, firstName, lastName, role: USER_ROLES.USER, activateToken: token })
+    // await this.mailerService.sendVerificationEmail(email, token)
+
     organization.users.push(newUser._id)
     return BaseResponse(res).success(await this.organizationService.findByIdAndUpdate(organization._id, organization))
   }

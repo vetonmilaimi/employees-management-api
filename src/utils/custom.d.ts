@@ -29,6 +29,12 @@ declare global {
       BASE_API_URL: string
       JWT_KEY: string
       CLIENT_URL: string
+
+      MAILER_HOST: string
+      MAILER_PORT: string
+      MAILER_USER: string
+      MAILER_SECURE: string
+      MAILER_PASS: string
     }
   }
 }
