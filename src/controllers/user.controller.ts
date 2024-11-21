@@ -53,7 +53,14 @@ class UserController {
     const token = this.tokenService.jwtSign({ email }, { expiresIn: 60 * 60 * 24 * 7 }) // 7 days validation
 
     const newUser = await this.userService.create({ email, firstName, lastName, activateToken: token, role: USER_ROLES.MANAGER })
-    await this.mailerService.sendVerificationEmail(email, token)
+
+    try {
+      await this.mailerService.sendVerificationEmail(email, token)
+      return BaseResponse(res).success('Something went wrong')
+    } catch (e) {
+      console.log(e)
+    }
+
     return BaseResponse(res).success(newUser)
   }
 
