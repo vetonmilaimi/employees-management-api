@@ -54,12 +54,7 @@ class UserController {
 
     const newUser = await this.userService.create({ email, firstName, lastName, activateToken: token, role: USER_ROLES.MANAGER })
 
-    try {
-      await this.mailerService.sendVerificationEmail(email, token)
-      return BaseResponse(res).success('Something went wrong')
-    } catch (e) {
-      console.log(e)
-    }
+    await this.mailerService.sendVerificationEmail(email, token)
 
     return BaseResponse(res).success(newUser)
   }
