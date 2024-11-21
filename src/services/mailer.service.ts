@@ -20,10 +20,11 @@ class MailerService {
     },
   })
 
-  public sendVerificationEmail = async (emailTo: string, verificationToken: string) => {
+  public sendVerificationEmail = async (emailTo: string, verificationToken: string, first_name: string) => {
     const template = await TemplateService.getTemplate(TemplateService.TEMPLATE_NAMES.activateAccount, {
       url: `${CLIENT_URL}`,
       token: verificationToken,
+      first_name,
     })
 
     return await this.transporter.sendMail({
