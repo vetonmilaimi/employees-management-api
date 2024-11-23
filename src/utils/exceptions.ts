@@ -74,6 +74,16 @@ export class LoginError extends BaseError {
   }
 }
 
+export class UserNotActivated extends BaseError {
+  name = 'User Not Activated'
+  message = 'This user is not activated, Please check your email'
+  statusCode = 401
+
+  constructor() {
+    super()
+  }
+}
+
 export class UserNotFoundError extends BaseError {
   name = 'user-not-found-error'
   message = "User doesn't exist"
