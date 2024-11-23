@@ -1,3 +1,4 @@
+import { JobEventControllerType } from './job-event.controller'
 import { OrganizationControllerType } from './organization.controller'
 import { ProjectControllerType } from './project.controller'
 import { UserControllerType } from './user.controller'
@@ -19,6 +20,10 @@ class Controllers {
 
   get project() {
     return this.loadController('project.controller') as ProjectControllerType
+  }
+
+  get jobEvent() {
+    return this.loadController('job-event.controller') as JobEventControllerType
   }
 }
 

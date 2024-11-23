@@ -44,3 +44,17 @@ export interface IProject {
 }
 
 export interface IProjectCreateReq extends Omit<IProject, '_id' | 'organization'> {}
+
+export interface IJobEvent {
+  _id: string
+  title: string
+  description?: string
+  project: string
+  employees: string[]
+  manager: string
+  start: Date
+  end: Date
+}
+
+// TODO: Check omitting 'employees' field
+export interface IJobEventCreateReq extends Omit<IJobEvent, '_id' | 'employees' | 'manager'> {}
