@@ -4,7 +4,7 @@ import { IProject } from '../../utils/types'
 const schema = new Schema(
   {
     name: { type: String, required: true },
-    organization: { type: Schema.Types.ObjectId, required: true },
+    organization: { type: Schema.Types.ObjectId, ref: 'organizations' },
     description: { type: String, required: false },
   },
   { timestamps: true }

@@ -3,7 +3,7 @@ import BaseResponse from '../utils/BaseResponse'
 import { IUserCreatePasswordRequest, IUserInvitationRequest, IUserLoginRequest, IUserRegisterRequest } from '../utils/types'
 import UserService from '../services/user.service'
 import CryptService from '../services/crypt.service'
-import { LoginError, AdminCannotBeDeleted, UserExistsError, UserNotFoundError } from '../utils/exceptions'
+import { LoginError, AdminCannotBeDeleted, UserExistsError, UserNotFoundError, UserNotActivated } from '../utils/exceptions'
 import { USER_ROLES } from '../utils/constants'
 import TokenService from '../services/token.service'
 import MailerService from '../services/mailer.service'
@@ -90,6 +90,11 @@ class UserController {
     const { email, password } = req.body
 
     const user = await this.userService.getUserByEmail(email)
+
+    if (!user?.activated) {
+      throw new UserNotActivated()
+    }
+
     if (!user || !CryptService.compare(password, user.password)) {
       throw new LoginError()
     }
