@@ -3,6 +3,7 @@ import validator from '../middleware/routeValidator.middleware'
 import ValidationSchemas from '../utils/validationSchemas'
 import authMiddleware from '../middleware/auth.middleware'
 import controllers from '../controllers'
+import organizationMiddleware from '../middleware/organization.middleware'
 
 const router = Router()
 
@@ -61,6 +62,17 @@ router.get(
   authMiddleware.validateAccessToken,
   authMiddleware.managerGuard,
   controllers.organization.listEmployees
+)
+
+router.post(
+  '/delete-employee',
+  validator.headers(ValidationSchemas.accessToken),
+  validator.headers(ValidationSchemas.organizationId),
+  validator.query(ValidationSchemas.mongoId),
+  authMiddleware.validateAccessToken,
+  authMiddleware.managerGuard,
+  organizationMiddleware.validateOrganization,
+  controllers.organization.deleteEmployee
 )
 
 export default router

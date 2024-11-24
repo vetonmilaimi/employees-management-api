@@ -50,6 +50,10 @@ class OrganizationService {
       .lean()
       .exec()
   }
+
+  public removeUserFromOrganization = async (organizationId: string, userId: string) => {
+    return await OrganizationModel.findByIdAndUpdate(organizationId, { $pull: { users: userId } })
+  }
 }
 
 export default OrganizationService

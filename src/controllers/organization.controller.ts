@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import OrganizationService from '../services/organization.service'
 import BaseResponse from '../utils/BaseResponse'
 import { IEmployeeAddReq, IOrganizationCreateReq } from '../utils/types'
-import { CannotFindOrganization, OneOrganizationAllowed, UserExistsOnOrganizationError } from '../utils/exceptions'
+import { CannotFindOrganization, OneOrganizationAllowed, UserExistsOnOrganizationError, UserNotFoundError } from '../utils/exceptions'
 import UserService from '../services/user.service'
 import { USER_ROLES } from '../utils/constants'
 import TokenService from '../services/token.service'
@@ -90,6 +90,20 @@ class OrganizationController {
     const employees = await this.userService.list({ _id: { $in: organization.users } })
 
     return BaseResponse(res).success(employees)
+  }
+
+  public deleteEmployee = async (req: Request<object, object, object, { _id: string }>, res: Response) => {
+    const employee = await this.userService.getUserById(req.query._id)
+
+    if (!employee) {
+      throw new UserNotFoundError()
+    }
+
+    if (employee.role === USER_ROLES.USER) {
+      await this.userService.deleteUserById(employee._id)
+    }
+
+    return BaseResponse(res).success(await this.organizationService.removeUserFromOrganization(req.organization._id, employee._id))
   }
 
   // public delete = async (req: Request, res: Response) => {
