@@ -49,9 +49,19 @@ class ValidationSchemas {
     name: Joi.string().required(),
     description: Joi.string().optional().allow(''),
   })
+
   static projectBody = Joi.object({
     name: Joi.string().required(),
     description: Joi.string().optional().allow(''),
+  })
+
+  static jobEventBody = Joi.object({
+    title: Joi.string().required(),
+    description: Joi.string().optional().allow(''),
+    project: Joi.string().optional().allow(''),
+    employees: Joi.array().items(Joi.string()).optional(),
+    start: Joi.date().optional(),
+    end: Joi.date().optional(),
   })
 }
 

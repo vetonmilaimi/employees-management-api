@@ -8,8 +8,8 @@ const schema = new Schema(
     project: { type: Schema.Types.ObjectId, ref: 'projects' },
     employees: [{ type: Schema.Types.ObjectId, ref: 'users' }],
     manager: { type: Schema.Types.ObjectId, ref: 'users' },
-    start: { type: Date, required: true },
-    end: { type: Date, required: true },
+    start: { type: Date, default: Date.now },
+    end: { type: Date, default: Date.now },
   },
   { timestamps: true }
 )
