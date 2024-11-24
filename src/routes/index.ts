@@ -3,6 +3,7 @@ import authRoutes from './auth.routes'
 import organizationRoutes from './organization.routes'
 import adminRoutes from './admin.routes'
 import projectRoutes from './project.routes'
+import jobEventRoutes from './job-event.routes'
 
 const router = Router()
 
@@ -14,5 +15,6 @@ router.use('/auth', authRoutes)
 router.use('/organization', organizationRoutes)
 router.use('/project', projectRoutes)
 router.use('/admin', adminRoutes)
+router.use('/job-events', jobEventRoutes)
 
 export default router
