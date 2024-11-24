@@ -213,3 +213,13 @@ export class ProjectNotFoundError extends BaseError {
     super()
   }
 }
+
+export class JobEventNotFoundError extends BaseError {
+  name = 'job-event-not-found-error'
+  message = "Job Event doesn't exist"
+  statusCode = 404
+
+  constructor() {
+    super()
+  }
+}
