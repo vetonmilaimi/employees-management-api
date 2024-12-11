@@ -8,6 +8,7 @@ const schema = new Schema(
     project: { type: Schema.Types.ObjectId, ref: 'projects' },
     employees: [{ type: Schema.Types.ObjectId, ref: 'users' }],
     manager: { type: Schema.Types.ObjectId, ref: 'users' },
+    organization: { type: Schema.Types.ObjectId, ref: 'organizations' },
     start: { type: Date, default: Date.now },
     end: { type: Date, default: Date.now },
   },

@@ -23,6 +23,7 @@ router.get(
   validator.headers(ValidationSchemas.accessToken),
   validator.headers(ValidationSchemas.organizationId),
   authMiddleware.validateAccessToken,
+  authMiddleware.managerGuard,
   organizationMiddleware.validateOrganization,
   controllers.jobEvent.list
 )
