@@ -1,25 +1,33 @@
 services:
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "${PORT}:${PORT}"
+      - "4000:4000"
     depends_on:
       - mongodb
     env_file:
       - .env
+    working_dir: /usr/src/app
     volumes:
-      - .:/app
-      - /app/node_modules
-  
-  mongodb:
-    image: mongo:6.0
-    container_name: mongodb
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
+      - /home/milv/veton/employees-management-system/employees-management-api:/usr/src/app
+    command: npm run dev 
 
-# TODO: Add Redis service
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    volumes:
+      - mongodb-data:/data/db
+
+  redis:
+    image: redis/redis-stack:7.2.0-v10
+    ports:
+      - "6379:6379"
+    hostname: redis
+    volumes:
+      - redis-data:/data
   
 volumes:
-  mongodb_data:
+  mongodb-data:
+  redis-data:
