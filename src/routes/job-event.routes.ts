@@ -8,7 +8,7 @@ import controllers from '../controllers'
 const router = Router()
 
 router.post(
-  '/create',
+  '/add',
   validator.headers(ValidationSchemas.accessToken),
   validator.headers(ValidationSchemas.organizationId),
   validator.body(ValidationSchemas.jobEventBody),
