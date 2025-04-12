@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-import { CLIENT_URL, MAILER_HOST, MAILER_PASS, MAILER_PORT, MAILER_SECURE, MAILER_USER } from '../utils/constants'
+import { CLIENT_URL, MAILER_HOST, MAILER_PASS, MAILER_PORT, MAILER_SECURE, MAILER_USER, USER_ROLES } from '../utils/constants'
 import TemplateService from './template.service'
 
 class MailerService {
@@ -20,11 +20,12 @@ class MailerService {
     },
   })
 
-  public sendVerificationEmail = async (emailTo: string, verificationToken: string, first_name: string) => {
+  public sendVerificationEmail = async (emailTo: string, verificationToken: string, first_name: string, role: USER_ROLES) => {
     const template = await TemplateService.getTemplate(TemplateService.TEMPLATE_NAMES.activateAccount, {
       url: `${CLIENT_URL}`,
       token: verificationToken,
       first_name,
+      role,
     })
 
     return await this.transporter.sendMail({

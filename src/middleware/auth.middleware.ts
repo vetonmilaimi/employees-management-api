@@ -98,6 +98,14 @@ class Auth {
 
     next()
   }
+
+  public userGuard = async (req: Request, _res: Response, next: NextFunction) => {
+    if (req.session.userRole !== USER_ROLES.USER) {
+      throw new UnAuthorized()
+    }
+
+    next()
+  }
 }
 
 export default new Auth()

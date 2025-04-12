@@ -55,11 +55,11 @@ class OrganizationController {
     const { email, firstName, lastName } = req.body
     const organization = await this.organizationService.findByUserId(req.session.userId)
 
-    const existingUser = await this.userService.getUserByEmail(email)
-
     if (!organization) {
       throw new CannotFindOrganization()
     }
+
+    const existingUser = await this.userService.getUserByEmail(email)
 
     if (existingUser) {
       const employeeOrganization = await this.organizationService.findByUserId(existingUser._id)
@@ -74,7 +74,7 @@ class OrganizationController {
     const token = this.tokenService.jwtSign({ email }, { expiresIn: 60 * 60 * 24 * 7 }) // 7 days validation
 
     const newUser = await this.userService.create({ email, firstName, lastName, role: USER_ROLES.USER, activateToken: token })
-    // await this.mailerService.sendVerificationEmail(email, token)
+    await this.mailerService.sendVerificationEmail(email, token, firstName, USER_ROLES.USER)
 
     organization.users.push(newUser._id)
     return BaseResponse(res).success(await this.organizationService.findByIdAndUpdate(organization._id, organization))
