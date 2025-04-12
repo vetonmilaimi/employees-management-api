@@ -23,7 +23,7 @@ class JobEventController {
       throw new JobEventNotFoundError()
     }
 
-    return BaseResponse(res).success(await this.jobEventService.create(req.body, req.organization._id))
+    return BaseResponse(res).success(await this.jobEventService.findByIdAndUpdate(req.query._id, req.body))
   }
 
   public list = async (req: Request, res: Response) => {
