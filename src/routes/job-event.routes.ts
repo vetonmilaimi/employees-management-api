@@ -4,6 +4,7 @@ import ValidationSchemas from '../utils/validationSchemas'
 import authMiddleware from '../middleware/auth.middleware'
 import organizationMiddleware from '../middleware/organization.middleware'
 import controllers from '../controllers'
+import { USER_ROLES } from '../utils/constants'
 
 const router = Router()
 
@@ -23,7 +24,7 @@ router.get(
   validator.headers(ValidationSchemas.accessToken),
   validator.headers(ValidationSchemas.organizationId),
   authMiddleware.validateAccessToken,
-  authMiddleware.managerGuard,
+  authMiddleware.roleGuard([USER_ROLES.MANAGER, USER_ROLES.USER]),
   organizationMiddleware.validateOrganization,
   controllers.jobEvent.list
 )

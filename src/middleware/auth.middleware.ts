@@ -1,7 +1,7 @@
 import { NextFunction } from 'connect'
 import TokenService from '../services/token.service'
 import UserService from '../services/user.service'
-import { Request, Response } from 'express'
+import { Request, RequestHandler, Response } from 'express'
 import { ExpiredAccessToken, ExpiredRefreshToken, InvalidAccessToken, InvalidRefreshToken, UnAuthorized } from '../utils/exceptions'
 import { UserSession } from '../utils/types'
 import { Entity, EntityId } from 'redis-om'
@@ -105,6 +105,17 @@ class Auth {
     }
 
     next()
+  }
+
+  public roleGuard(roles: USER_ROLES[]): RequestHandler {
+    return (req, _res, next) => {
+      const roleMatch = roles.includes(req.session.userRole)
+      if (!roleMatch) {
+        throw new UnAuthorized()
+      }
+
+      next()
+    }
   }
 }
 
