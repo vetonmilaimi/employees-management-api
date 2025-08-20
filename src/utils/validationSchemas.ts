@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { PASSWORD_REGEX } from './constants'
+import { PASSWORD_REGEX, JOB_EVENT_STATUS } from './constants'
 
 class ValidationSchemas {
   static register = Joi.object({
@@ -62,6 +62,9 @@ class ValidationSchemas {
     employees: Joi.array().items(Joi.string()).optional(),
     start: Joi.date().optional(),
     end: Joi.date().optional(),
+    status: Joi.string()
+      .valid(...Object.values(JOB_EVENT_STATUS))
+      .optional(),
   })
 }
 

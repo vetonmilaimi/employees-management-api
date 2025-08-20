@@ -11,6 +11,12 @@ const schema = new Schema(
     organization: { type: Schema.Types.ObjectId, ref: 'organizations' },
     start: { type: Date },
     end: { type: Date },
+    status: {
+      type: String,
+      enum: ['todo', 'in progress', 'on review', 'done'],
+      default: 'todo',
+      required: true,
+    },
   },
   { timestamps: true }
 )

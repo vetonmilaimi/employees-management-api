@@ -1,4 +1,4 @@
-import { USER_ROLES } from './constants'
+import { USER_ROLES, JOB_EVENT_STATUS } from './constants'
 
 export interface UserSession {
   entityId: string
@@ -54,6 +54,7 @@ export interface IJobEvent {
   employees?: string[]
   start?: Date
   end?: Date
+  status: JOB_EVENT_STATUS
 }
 
 // TODO: Check omitting 'employees' field
