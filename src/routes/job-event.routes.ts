@@ -36,7 +36,7 @@ router.post(
   validator.query(ValidationSchemas.mongoId),
   validator.body(ValidationSchemas.jobEventBody),
   authMiddleware.validateAccessToken,
-  authMiddleware.managerGuard,
+  authMiddleware.roleGuard([USER_ROLES.MANAGER]),
   organizationMiddleware.validateOrganization,
   controllers.jobEvent.update
 )

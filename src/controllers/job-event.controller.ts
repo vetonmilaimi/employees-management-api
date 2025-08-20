@@ -23,7 +23,19 @@ class JobEventController {
       throw new JobEventNotFoundError()
     }
 
-    return BaseResponse(res).success(await this.jobEventService.findByIdAndUpdate(req.query._id, req.body))
+    const update: Record<string, unknown> = { ...req.body }
+    const unset: Record<string, unknown> = {}
+    if (!('start' in req.body) || req.body.start === undefined) unset.start = ''
+    if (!('end' in req.body) || req.body.end === undefined) unset.end = ''
+
+    let updateQuery: Record<string, unknown>
+    if (Object.keys(unset).length > 0) {
+      updateQuery = { $set: update, $unset: unset }
+    } else {
+      updateQuery = update
+    }
+
+    return BaseResponse(res).success(await this.jobEventService.findByIdAndUpdate(req.query._id, updateQuery as IJobEventCreateReq))
   }
 
   public list = async (req: Request, res: Response) => {

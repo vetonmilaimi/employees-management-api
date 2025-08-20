@@ -9,8 +9,8 @@ const schema = new Schema(
     employees: [{ type: Schema.Types.ObjectId, ref: 'users' }],
     manager: { type: Schema.Types.ObjectId, ref: 'users' },
     organization: { type: Schema.Types.ObjectId, ref: 'organizations' },
-    start: { type: Date, default: Date.now },
-    end: { type: Date, default: Date.now },
+    start: { type: Date },
+    end: { type: Date },
   },
   { timestamps: true }
 )
