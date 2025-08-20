@@ -4,6 +4,7 @@
 
 
 
+# All route documentation below is generated with AI for accuracy and consistency.
 ## API Routes
 
 ### Auth
