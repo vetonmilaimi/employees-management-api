@@ -38,7 +38,13 @@ class JobEventController {
     return BaseResponse(res).success(await this.jobEventService.findByIdAndUpdate(req.query._id, updateQuery as IJobEventCreateReq))
   }
 
-  public list = async (req: Request, res: Response) => {
+  public list = async (req: Request<object, object, object, { project?: string }>, res: Response) => {
+    const projectId = req.query.project
+
+    if (projectId) {
+      return BaseResponse(res).success(await this.jobEventService.listJobEventsByProject(projectId))
+    }
+
     return BaseResponse(res).success(await this.jobEventService.listJobEvents(req.organization._id))
   }
 
