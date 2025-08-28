@@ -11,7 +11,6 @@ class JobEventController {
     this.jobEventService = new JobEventService()
   }
 
-  // TODO: Check this
   public create = async (req: Request<object, object, IJobEventCreateReq>, res: Response) => {
     return BaseResponse(res).success(await this.jobEventService.create(req.body, req.organization._id))
   }
@@ -66,6 +65,33 @@ class JobEventController {
     }
 
     return BaseResponse(res).success(await this.jobEventService.delete(jobEvent._id))
+  }
+
+  public timeOnProject = async (req: Request<object, object, object, { _id: string }>, res: Response) => {
+    const jobEvents = await this.jobEventService.listJobEventsByProject(req.query._id)
+
+    if (!jobEvents || jobEvents.length === 0) {
+      throw new JobEventNotFoundError()
+    }
+
+    const now = new Date()
+    let totalMilliseconds = 0
+
+    for (const event of jobEvents) {
+      if (event.start) {
+        const start = new Date(event.start)
+        const end = event.end ? new Date(event.end) : now
+        const effectiveEnd = end > now ? now : end
+
+        const duration = effectiveEnd.getTime() - start.getTime()
+        totalMilliseconds += duration
+      }
+    }
+    const totalMinutes = Math.floor(totalMilliseconds / (1000 * 60))
+    const hours = Math.floor(totalMinutes / 60)
+    const minutes = totalMinutes % 60
+
+    return BaseResponse(res).success({ hours, minutes })
   }
 }
 

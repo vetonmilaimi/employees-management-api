@@ -53,6 +53,17 @@ router.post(
 )
 
 router.get(
+  '/time-on-project',
+  validator.headers(ValidationSchemas.accessToken),
+  validator.headers(ValidationSchemas.organizationId),
+  validator.query(ValidationSchemas.mongoId),
+  authMiddleware.validateAccessToken,
+  authMiddleware.managerGuard,
+  organizationMiddleware.validateOrganization,
+  controllers.jobEvent.timeOnProject
+)
+
+router.get(
   '/',
   validator.headers(ValidationSchemas.accessToken),
   validator.headers(ValidationSchemas.organizationId),
