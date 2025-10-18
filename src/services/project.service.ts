@@ -1,4 +1,5 @@
 import ProjectModel from '../models/db/project.model'
+import JobEventModel from '../models/db/job-event.model'
 import { IProjectCreateReq } from '../utils/types'
 
 class ProjectService {
@@ -23,6 +24,9 @@ class ProjectService {
   }
 
   public delete = async (projectId: string) => {
+    // remove all job events that belong to this project first
+    await JobEventModel.deleteMany({ project: projectId }).exec()
+
     return await ProjectModel.findByIdAndDelete(projectId)
   }
 }
