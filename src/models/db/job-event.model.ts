@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose'
 import { IJobEvent } from '../../utils/types'
+import { JOB_EVENT_STATUS } from '../../utils/constants'
 
 const schema = new Schema(
   {
@@ -13,7 +14,7 @@ const schema = new Schema(
     end: { type: Date },
     status: {
       type: String,
-      enum: ['todo', 'in progress', 'on review', 'done'],
+      enum: JOB_EVENT_STATUS,
       default: 'todo',
       required: true,
     },

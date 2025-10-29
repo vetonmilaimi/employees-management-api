@@ -1,4 +1,4 @@
-import { USER_ROLES, JOB_EVENT_STATUS } from './constants'
+import { USER_ROLES, JOB_EVENT_STATUS, PROJECT_STATUS } from './constants'
 
 export interface UserSession {
   entityId: string
@@ -41,6 +41,7 @@ export interface IProject {
   name: string
   organization: string
   description?: string
+  status: PROJECT_STATUS
 }
 
 export interface IProjectCreateReq extends Omit<IProject, '_id' | 'organization'> {}

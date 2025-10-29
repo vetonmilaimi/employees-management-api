@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { PASSWORD_REGEX, JOB_EVENT_STATUS } from './constants'
+import { PASSWORD_REGEX, JOB_EVENT_STATUS, PROJECT_STATUS } from './constants'
 
 class ValidationSchemas {
   static register = Joi.object({
@@ -53,6 +53,9 @@ class ValidationSchemas {
   static projectBody = Joi.object({
     name: Joi.string().required(),
     description: Joi.string().optional().allow(''),
+    status: Joi.string()
+      .valid(...Object.values(PROJECT_STATUS))
+      .optional(),
   })
 
   static jobEventBody = Joi.object({

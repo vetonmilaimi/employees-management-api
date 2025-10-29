@@ -30,6 +30,13 @@ export enum JOB_EVENT_STATUS {
   DONE = 'done',
 }
 
+export enum PROJECT_STATUS {
+  TODO = 'todo',
+  IN_PROGRESS = 'in progress',
+  ON_REVIEW = 'on review',
+  DONE = 'done',
+}
+
 export const AdminCredentials = {
   email: process.env.ADMIN_EMAIL || '',
   password: process.env.ADMIN_PWD || '',
