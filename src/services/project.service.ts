@@ -15,6 +15,20 @@ class ProjectService {
     return await ProjectModel.findByIdAndUpdate(projectId, data).lean().exec()
   }
 
+  public addEmployeesToProject = async (projectId: string, employeeIds: string[]) => {
+    if (employeeIds.length === 0) {
+      return
+    }
+
+    return await ProjectModel.findByIdAndUpdate(
+      projectId,
+      { $addToSet: { employees: { $each: employeeIds } } },
+      { new: true }
+    )
+      .lean()
+      .exec()
+  }
+
   public findOne = async (data: object) => {
     return await ProjectModel.findOne(data).lean().exec()
   }

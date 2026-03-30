@@ -58,5 +58,4 @@ export interface IJobEvent {
   status: JOB_EVENT_STATUS
 }
 
-// TODO: Check omitting 'employees' field
-export interface IJobEventCreateReq extends Omit<IJobEvent, '_id' | 'employees' | 'manager'> {}
+export interface IJobEventCreateReq extends Omit<IJobEvent, '_id' | 'manager'> {}
